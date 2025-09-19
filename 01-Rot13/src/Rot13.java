@@ -4,32 +4,24 @@ public class Rot13 {
     static int len = minus.length;
 
     public static String xifraRot13(String str) {
-        String result = "";
-        for (char c : str.toCharArray()) {
-            if (buscaLletra(c, mayus) != -1) {
-                char xifrada = mayus[(buscaLletra(c, mayus) + 13) % len];
-                result += xifrada;
-            }
-            else if (buscaLletra(c, minus) != -1) {
-                char xifrada = minus[(buscaLletra(c, minus) + 13) % len];
-                result += xifrada;
-            }
-            else result += c;
-        }
-        return result;
+        return xifraRotN(str, 13);
+    }
+    
+    public static String desxifraRot13(String str) {
+        return xifraRotN(str, -13);
     }
 
-    public static String desxifraRot13(String str) {
+    public static String xifraRotN(String str, int n) {
         String result = "";
         for (char c : str.toCharArray()) {
             if (buscaLletra(c, mayus) != -1) {
-                int posicio = (buscaLletra(c, mayus) - 13);
-                char xifrada = (posicio < 0) ? mayus[posicio+len]:mayus[posicio];
+                int posicio = (buscaLletra(c, mayus) + n);
+                char xifrada = (posicio < 0) ? mayus[posicio+len]:mayus[posicio % len];
                 result += xifrada;
             }
             else if (buscaLletra(c, minus) != -1) {
-                int posicio = (buscaLletra(c, minus) - 13);
-                char xifrada = (posicio < 0) ? minus[posicio+len]:minus[posicio];
+                int posicio = (buscaLletra(c, minus) + n);
+                char xifrada = (posicio < 0) ? minus[posicio+len]:minus[posicio % len];
                 result += xifrada;
             }
             else result += c;
