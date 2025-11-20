@@ -20,7 +20,6 @@ public class XifradorAES implements Xifrador {
     public static final Charset CHARSET = StandardCharsets.UTF_8;
 
     private static final int MIDA_IV = 16;
-    private static final String CLAU = "clau1112";
 
     private byte[] iv = new byte[MIDA_IV];
 
@@ -36,7 +35,7 @@ public class XifradorAES implements Xifrador {
             IvParameterSpec ivSpec = new IvParameterSpec(iv);
             //Genera hash
             MessageDigest sha = MessageDigest.getInstance(ALGORISME_HASH);
-            byte[] keyBytes = sha.digest(CLAU.getBytes(CHARSET));
+            byte[] keyBytes = sha.digest(clau.getBytes(CHARSET));
             SecretKeySpec secretKey = new SecretKeySpec(keyBytes, ALGORISME_XIFRAT);
 
             //Encrypt
@@ -71,7 +70,7 @@ public class XifradorAES implements Xifrador {
     
             //Fer hash de la clau
             MessageDigest sha = MessageDigest.getInstance(ALGORISME_HASH);
-            byte[] keyBytes = sha.digest(CLAU.getBytes(CHARSET));
+            byte[] keyBytes = sha.digest(clau.getBytes(CHARSET));
             SecretKeySpec secretKey = new SecretKeySpec(keyBytes, ALGORISME_XIFRAT);
     
             //Desxifrat
